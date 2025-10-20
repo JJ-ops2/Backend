@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Community Service Tracker API",
-    "description": "REST API for Community Service Tracker - Assignment 2",
+    "name": "Student Incentive App",
+    "description": "REST API for Student Incentive App - Assignment 2",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [

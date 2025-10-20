@@ -1,0 +1,141 @@
+What is Postman?
+Think of Postman like a fake phone app that lets you test your backend without building a real app first. Instead of clicking buttons on a website, you send requests to your server and see what it sends back.
+
+Step 1: Get Postman (2 minutes)
+Option A: Use Postman in Your Browser (Easiest)
+Go to: https://www.postman.com/
+Click the "Sign Up for Free" button (top right)
+Create a free account (use your email)
+Click "Web" when asked how you want to use Postman
+You'll be in the Postman web app - no download needed!
+Option B: Download Desktop App
+Go to: https://www.postman.com/downloads/
+Click the big download button for your computer (Mac/Windows/Linux)
+Install it like any other program
+Open Postman and sign in (or skip and use as guest)
+Step 2: Import Your Test Collection (1 minute)
+In Postman, look at the left sidebar - you'll see "Collections"
+Click the "Import" button (it's near the top left, looks like a folder with an arrow)
+A popup will appear - click "Upload Files"
+Navigate to your project folder and select the file: postman_collection.json
+Click "Import"
+You should now see "Community Service Tracker API" in your Collections list on the left!
+
+Step 3: Set Up the Server URL (30 seconds)
+Click on the collection name "Community Service Tracker API" in the left sidebar
+Click the "Variables" tab (it's at the top of the middle panel)
+You'll see a variable called base_url
+Make sure it says: http://localhost:5000
+If your server is running on a different address, change it here
+Click "Save" (top right)
+Step 4: Test Your API (The Fun Part!)
+First Test: Login as a Student
+In the left sidebar, expand "Community Service Tracker API" by clicking the arrow
+Expand "Authentication" folder
+Click on "Student Login"
+You'll see three sections:
+
+Top area: Shows POST and a URL
+Middle area: The "Body" tab shows the login information
+Bottom area: Empty for now (this is where results appear)
+Click the big blue "Send" button (top right)
+What You Should See:
+
+Bottom section fills with data
+You'll see "access_token": "eyJ0eXAiOiJKV1QiLC..."
+Green text saying 200 OK (means success!)
+Below that, you'll see test results with green checkmarks ✓
+What Just Happened:
+You logged in as "alice" and got back a security token (like a temporary password). Postman automatically saved this token so the next requests can use it.
+
+Second Test: Get Student Profile
+Go back to the left sidebar
+Expand "Student Endpoints" folder
+Click "Get My Profile"
+Click "Send"
+What You Should See:
+
+{
+  "id": 1,
+  "username": "alice",
+  "name": "Alice Johnson",
+  "total_hours": 15,
+  "accolades": [10],
+  "confirmation_requested": false
+}
+This shows Alice's current profile with 15 hours and one accolade (for reaching 10 hours).
+
+Third Test: Login as Staff
+Go to Authentication → Staff Login
+Click "Send"
+You'll get a different token - this one identifies you as staff, not a student.
+
+Fourth Test: Staff Logs Hours
+Go to Staff Endpoints → Log Hours for Student
+Look at the Body tab - you'll see:
+{
+  "student_id": 2,
+  "hours": 20
+}
+Click "Send"
+What You Should See:
+
+Success message
+Bob Smith (student ID 2) now has 20 hours
+He automatically got the 10-hour accolade!
+Understanding the Interface
+What Each Color Means:
+🟢 Green (200 OK) = Success! Everything worked
+🔴 Red (401 Unauthorized) = You need to log in first
+🟡 Orange (404 Not Found) = The endpoint doesn't exist
+The Three Tabs at Top:
+Params: Add stuff to the URL (like ?page=2)
+Authorization: Security credentials (already set up for you!)
+Headers: Extra information sent with request
+Body: The data you're sending (like login info or hours to add)
+The Bottom Section Shows:
+Body: The actual response data (what the server sent back)
+Headers: Technical details
+Test Results: Automated checks (green ✓ = passed)
+Try All the Endpoints!
+Here's what each one does:
+
+Authentication
+✅ Student Login - Get a student token
+✅ Staff Login - Get a staff token
+✅ Invalid Login - See what happens with wrong password
+Student Endpoints
+✅ Get My Profile - See your hours and accolades
+✅ Request Hours Confirmation - Ask staff to verify your hours
+✅ Get Student Accolades - See achievement badges
+✅ Get All Students - See everyone (staff only)
+Staff Endpoints
+✅ Get My Staff Profile - View staff account details
+✅ Log Hours for Student - Add hours to a student
+✅ Get Pending Confirmations - See who needs verification
+✅ Confirm Student Hours - Approve a student's request
+Leaderboard
+✅ Get Leaderboard - See who has the most hours
+Pro Tips
+Running All Tests at Once
+Right-click on the collection name in the sidebar
+Click "Run collection"
+Click the big "Run Community Service Tracker API" button
+Watch all tests run automatically like a movie! 🎬
+If Something Goes Wrong
+Make sure your Flask server is running (you should see it in the Replit console)
+Make sure base_url is set to http://localhost:5000
+Try the login endpoints first (you need a token for other endpoints)
+See What Token You Have
+Click on the collection name
+Click "Variables" tab
+Look at student_token and staff_token - these were automatically saved when you logged in
+What to Screenshot for Your Assignment
+Take screenshots of:
+
+The collections list showing all your endpoints
+A successful login showing the token
+The "Get My Profile" response showing student data
+The test results (green checkmarks at the bottom)
+The "Run collection" results showing all tests passing
+These prove your API works correctly!
