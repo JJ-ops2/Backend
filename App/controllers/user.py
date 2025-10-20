@@ -1,8 +1,8 @@
 from App.models import User
 from App.database import db
 
-def create_user(username, password):
-    newuser = User(username=username, password=password)
+def create_user(username, password, name="Generic User"):
+    newuser = User(username=username, password=password, name=name)
     db.session.add(newuser)
     db.session.commit()
     return newuser
@@ -28,7 +28,6 @@ def update_user(id, username):
     user = get_user(id)
     if user:
         user.username = username
-        # user is already in the session; no need to re-add
         db.session.commit()
         return True
     return None
